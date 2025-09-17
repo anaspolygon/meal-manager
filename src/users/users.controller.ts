@@ -12,7 +12,7 @@ export class UsersController {
   }
   @Post()
   createUser(@Body() user: CreateUserDto) {
-    console.log(user);
+    console.log(user instanceof CreateUserDto);
     return { message: 'User created' };
   }
 }
