@@ -6,7 +6,9 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private usersService: UsersService) {}
   @Get()
-  getUsers() {}
+  getUsers() {
+    return this.usersService.getAllUsers();
+  }
   @Post()
   async createUser(@Body() user: CreateUserDto) {
     await this.usersService.createUser(user);
