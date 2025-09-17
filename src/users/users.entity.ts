@@ -29,6 +29,10 @@ export class Users {
     unique: true,
   })
   email: string;
-  @Column()
+  @Column({
+    type: 'varchar',
+    nullable: false,
+    length: 100,
+  })
   password: string;
 }
