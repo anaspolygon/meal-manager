@@ -12,7 +12,9 @@ export class UsersService {
   ) {}
 
   public getAllUsers() {
-    return this.usersRepository.find();
+    return this.usersRepository.find({
+      select: ['id', 'firstName', 'lastName', 'gender', 'email'],
+    });
   }
 
   public async createUser(userDto: CreateUserDto) {
