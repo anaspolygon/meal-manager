@@ -4,6 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { Users } from './users/users.entity';
+import { ProfileModule } from './profile/profile.module';
+import { Profile } from './profile/profile.entity';
 
 @Module({
   imports: [
@@ -11,16 +13,17 @@ import { Users } from './users/users.entity';
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
         type: 'postgres',
-        entities: [Users],
+        entities: [Users, Profile],
         synchronize: true,
         host: 'localhost',
         port: 5432,
         username: 'postgres',
-        password: 'admin1234',
-        // password: 'password',
+        // password: 'admin1234',
+        password: 'password',
         database: 'mealmanager',
       }),
     }),
+    ProfileModule,
   ],
   controllers: [AppController],
   providers: [AppService],
