@@ -6,13 +6,13 @@ export class Profile {
   id: number;
   @Column({
     type: 'varchar',
-    nullable: false,
+    nullable: true,
     length: 100,
   })
   firstName: string;
   @Column({
     type: 'varchar',
-    nullable: false,
+    nullable: true,
     length: 100,
   })
   lastName: string;

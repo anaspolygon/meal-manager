@@ -13,7 +13,7 @@ export class UsersService {
 
   public getAllUsers() {
     return this.usersRepository.find({
-      select: ['id', 'firstName', 'lastName', 'gender', 'email'],
+      select: ['id', 'email'],
     });
   }
 
