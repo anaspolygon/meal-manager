@@ -13,7 +13,8 @@ import { Profile } from './profile/profile.entity';
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
         type: 'postgres',
-        entities: [Users, Profile],
+        // entities: [Users, Profile],
+        autoLoadEntities:true,
         synchronize: true,
         host: 'localhost',
         port: 5432,
