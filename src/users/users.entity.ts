@@ -28,8 +28,8 @@ export class Users {
   })
   password: string;
 
-  @OneToOne(() => Profile, {
-    eager: true,
+  @OneToOne(() => Profile, (profile) => profile.user, {
+    // eager: true,
     cascade: ['insert'],
   })
   @JoinColumn()

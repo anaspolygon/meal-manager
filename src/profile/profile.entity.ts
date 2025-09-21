@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Users } from 'src/users/users.entity';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Profile {
@@ -37,4 +38,6 @@ export class Profile {
     nullable: true,
   })
   profilePicture: string;
+  @OneToOne(() => Users, (user) => user.profile)
+  user: Users;
 }

@@ -11,6 +11,8 @@ export class ProfileService {
   ) {}
 
   public getAllProfiles() {
-    return this.porfileRepository.find();
+    return this.porfileRepository.find({
+      relations: ['user'],
+    });
   }
 }
