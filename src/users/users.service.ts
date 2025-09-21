@@ -30,6 +30,7 @@ export class UsersService {
     }
     // let profile = this.profileRepository.create(userDto.profile ?? {});
     // await this.profileRepository.save(profile);
+    userDto.profile = userDto.profile ?? {};
     let newUser = this.usersRepository.create(userDto);
     // newUser.profile = profile;
     newUser = await this.usersRepository.save(newUser);
