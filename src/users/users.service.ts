@@ -36,4 +36,14 @@ export class UsersService {
     newUser = await this.usersRepository.save(newUser);
     return newUser;
   }
+
+  public async deleteUser(id: number) {
+    const user = await this.usersRepository.findOneBy({ id });
+    await this.usersRepository.delete(id);
+    if (user && user.profile) {
+      await this.profileRepository.delete(user.profile.id);
+    }
+
+    return 'User deleted successfully';
+  }
 }
