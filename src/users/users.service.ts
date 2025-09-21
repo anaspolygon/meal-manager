@@ -28,10 +28,10 @@ export class UsersService {
     if (user) {
       return 'User already exists';
     }
-    let profile = this.profileRepository.create(userDto.profile ?? {});
-    await this.profileRepository.save(profile);
+    // let profile = this.profileRepository.create(userDto.profile ?? {});
+    // await this.profileRepository.save(profile);
     let newUser = this.usersRepository.create(userDto);
-    newUser.profile = profile;
+    // newUser.profile = profile;
     newUser = await this.usersRepository.save(newUser);
     return newUser;
   }
