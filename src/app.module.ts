@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { Users } from './users/users.entity';
 import { ProfileModule } from './profile/profile.module';
 import { Profile } from './profile/profile.entity';
+import { UserMealsModule } from './user_meals/user_meals.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { Profile } from './profile/profile.entity';
       }),
     }),
     ProfileModule,
+    UserMealsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
