@@ -1,10 +1,12 @@
 import { Profile } from 'src/profile/profile.entity';
+import { UserMeals } from 'src/user_meals/user_meals.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -34,6 +36,9 @@ export class Users {
   })
   @JoinColumn()
   profile?: Profile;
+
+  @OneToMany(() => UserMeals, (usermeal) => usermeal.user)
+  userMeals: UserMeals[];
 
   @CreateDateColumn()
   createdAt: Date;

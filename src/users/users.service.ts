@@ -16,8 +16,8 @@ export class UsersService {
 
   public getAllUsers() {
     return this.usersRepository.find({
-      select: ['id', 'email'],
-      relations: ['profile'],
+      // select: ['id', 'email'],
+      relations: ['profile','userMeals'],
     });
   }
 
