@@ -1,12 +1,10 @@
 import { IsIn, IsInt, IsNotEmpty, IsNumber, IsPositive } from 'class-validator';
 
 export class CreateUserDepositsDto {
-  @IsNumber()
+  @IsNumber({maxDecimalPlaces: 2})
   @IsPositive()
-  @IsNotEmpty()
   amount: number;
-  @IsNumber()
+  @IsInt()
   @IsPositive()
-  @IsNotEmpty()
   userId: number;
 }

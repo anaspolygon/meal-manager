@@ -14,7 +14,9 @@ export class UserDeposits {
   id: number;
 
   @Column({
-    type: 'int',
+    type: 'decimal',
+    precision:10,
+    scale:2,
     nullable: false,
     default: 0,
   })
