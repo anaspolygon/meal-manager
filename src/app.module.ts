@@ -7,6 +7,7 @@ import { Users } from './users/users.entity';
 import { ProfileModule } from './profile/profile.module';
 import { Profile } from './profile/profile.entity';
 import { UserMealsModule } from './user_meals/user_meals.module';
+import { UserDepositsModule } from './user_deposits/user_deposits.module';
 
 @Module({
   imports: [
@@ -20,13 +21,14 @@ import { UserMealsModule } from './user_meals/user_meals.module';
         host: 'localhost',
         port: 5432,
         username: 'postgres',
-        // password: 'admin1234',
-        password: 'password',
+        password: 'admin1234',
+        // password: 'password',
         database: 'mealmanager',
       }),
     }),
     ProfileModule,
     UserMealsModule,
+    UserDepositsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
