@@ -13,7 +13,10 @@ export class UserMealsService {
 
   public async createMeal(userMeal: CreateUserMealsDto) {
     console.log(userMeal);
-    const meal = this.userMealsRepository.create({...userMeal,user:{id:userMeal.userId}});
+    const meal = this.userMealsRepository.create({
+      ...userMeal,
+      user: { id: userMeal.userId },
+    });
     return await this.userMealsRepository.save(meal);
   }
 }
