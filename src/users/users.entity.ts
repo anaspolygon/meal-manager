@@ -1,4 +1,5 @@
 import { Profile } from 'src/profile/profile.entity';
+import { UserBazars } from 'src/user_bazars/user_bazars.entity';
 import { UserDeposits } from 'src/user_deposits/user_deposits.entity';
 import { UserMeals } from 'src/user_meals/user_meals.entity';
 import {
@@ -43,6 +44,9 @@ export class Users {
 
   @OneToMany(() => UserDeposits, (userdeposit) => userdeposit.user)
   userDeposits: UserDeposits[];
+
+  @OneToMany(() => UserBazars, (userBazar) => userBazar.user)
+  userBazars: UserBazars[];
 
   @CreateDateColumn()
   createdAt: Date;

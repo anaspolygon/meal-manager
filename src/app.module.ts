@@ -8,6 +8,7 @@ import { ProfileModule } from './profile/profile.module';
 import { Profile } from './profile/profile.entity';
 import { UserMealsModule } from './user_meals/user_meals.module';
 import { UserDepositsModule } from './user_deposits/user_deposits.module';
+import { UserBazarsModule } from './user_bazars/user_bazars.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { UserDepositsModule } from './user_deposits/user_deposits.module';
     ProfileModule,
     UserMealsModule,
     UserDepositsModule,
+    UserBazarsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
