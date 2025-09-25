@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserBazars } from './user_bazars.entity';
 import { CreateUserBazarsDto } from './dtos/create-userBazars.dto';
+import { UpdateUserBazarsDto } from './dtos/update-userBazars.dto';
 
 @Injectable()
 export class UserBazarsService {
@@ -16,5 +17,13 @@ export class UserBazarsService {
       user: { id: userBazar.userId },
     });
     return await this.userBazarsRepository.save(newBazar);
+  }
+  public async updateUserBazar(id: number, userBazar: UpdateUserBazarsDto) {
+    const bazar = await this.userBazarsRepository.findOne({where: { id }});
+    if(bazar){
+      Object.assign(bazar, userBazar);
+      return await this.userBazarsRepository.save(bazar);
+    }
+    return null;
   }
 }
