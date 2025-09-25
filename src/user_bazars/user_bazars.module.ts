@@ -7,6 +7,6 @@ import { UserBazars } from './user_bazars.entity';
 @Module({
   controllers: [UserBazarsController],
   providers: [UserBazarsService],
-  imports:[TypeOrmModule.forFeature([UserBazars])]
+  imports: [TypeOrmModule.forFeature([UserBazars])],
 })
 export class UserBazarsModule {}
