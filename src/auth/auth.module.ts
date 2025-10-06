@@ -7,7 +7,13 @@ import { BcryptProvider } from './provider/bcrypt.provider';
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService, HashingProvider, BcryptProvider],
+  providers: [
+    AuthService,
+    {
+      provide: HashingProvider,
+      useClass: BcryptProvider,
+    },
+  ],
   imports: [UsersModule],
 })
 export class AuthModule {}
