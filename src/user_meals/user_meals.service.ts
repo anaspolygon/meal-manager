@@ -12,11 +12,22 @@ export class UserMealsService {
   ) {}
 
   public getUserMeals(userId: number) {
-    console.log(new Date());
+    const today = new Date();
+
+    // first day of month
+    const start = new Date(today.getFullYear(), today.getMonth(), 1);
+    start.setHours(0, 0, 0, 0);
+
+    // last day of month
+    const end = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+    end.setHours(23, 59, 59, 999);
+
+    console.log(start, end);
+
     return this.userMealsRepository.find({
       where: {
         user: { id: userId },
-        createdAt: Between(new Date(), new Date()),
+        createdAt: Between(start, end),
       },
     });
   }
