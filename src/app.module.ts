@@ -3,12 +3,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
-import { Users } from './users/users.entity';
 import { ProfileModule } from './profile/profile.module';
-import { Profile } from './profile/profile.entity';
 import { UserMealsModule } from './user_meals/user_meals.module';
 import { UserDepositsModule } from './user_deposits/user_deposits.module';
 import { UserBazarsModule } from './user_bazars/user_bazars.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -22,8 +21,8 @@ import { UserBazarsModule } from './user_bazars/user_bazars.module';
         host: 'localhost',
         port: 5432,
         username: 'postgres',
-        password: 'admin1234',
-        // password: 'password',
+        // password: 'admin1234',
+        password: 'password',
         database: 'mealmanager',
       }),
     }),
@@ -31,6 +30,7 @@ import { UserBazarsModule } from './user_bazars/user_bazars.module';
     UserMealsModule,
     UserDepositsModule,
     UserBazarsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
