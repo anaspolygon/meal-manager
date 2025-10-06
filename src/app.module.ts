@@ -7,6 +7,7 @@ import { ProfileModule } from './profile/profile.module';
 import { UserMealsModule } from './user_meals/user_meals.module';
 import { UserDepositsModule } from './user_deposits/user_deposits.module';
 import { UserBazarsModule } from './user_bazars/user_bazars.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { UserBazarsModule } from './user_bazars/user_bazars.module';
     UserMealsModule,
     UserDepositsModule,
     UserBazarsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
