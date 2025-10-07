@@ -1,6 +1,7 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dtos/create-user.dto';
 import { UsersService } from 'src/users/users.service';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -8,6 +9,11 @@ export class AuthService {
     @Inject(forwardRef(() => UsersService))
     private readonly usersService: UsersService,
   ) {}
+
+  public async login(loginDto: LoginDto) {
+    const user = await this.usersService.findUserByEmail(loginDto.email);
+    return user;
+  }
   public async signup(createUserDto: CreateUserDto) {
     return await this.usersService.createUser(createUserDto);
   }

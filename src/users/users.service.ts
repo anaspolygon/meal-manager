@@ -52,4 +52,8 @@ export class UsersService {
 
     return 'User deleted successfully';
   }
+
+  public async findUserByEmail(email: string) {
+    return await this.usersRepository.findOneBy({ email });
+  }
 }
