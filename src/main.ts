@@ -13,6 +13,11 @@ async function bootstrap() {
       transform: true, // automatically transform payloads to be objects typed according to their DTO classes
     }),
   );
+
+  app.enableCors({
+    origin: 'http://localhost:3001', // your Next.js app
+    credentials: true, // if you use cookies/auth headers
+  });
   const config = new DocumentBuilder()
     .setTitle('Meal Manager')
     .setDescription('The API description')
