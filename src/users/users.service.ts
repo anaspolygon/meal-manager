@@ -1,9 +1,10 @@
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { Users } from './users.entity';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { Profile } from 'src/profile/profile.entity';
+import { HashingProvider } from 'src/auth/provider/hashing.provider';
 
 @Injectable()
 export class UsersService {
@@ -12,12 +13,14 @@ export class UsersService {
     private readonly usersRepository: Repository<Users>,
     @InjectRepository(Profile)
     private readonly profileRepository: Repository<Profile>,
+    @Inject(forwardRef(() => HashingProvider))
+    private readonly hashingProvider: HashingProvider,
   ) {}
 
   public getAllUsers() {
     return this.usersRepository.find({
       // select: ['id', 'email'],
-      relations: ['profile', 'userMeals','userDeposits'],
+      relations: ['profile', 'userMeals', 'userDeposits'],
     });
   }
 
@@ -31,7 +34,10 @@ export class UsersService {
     // let profile = this.profileRepository.create(userDto.profile ?? {});
     // await this.profileRepository.save(profile);
     userDto.profile = userDto.profile ?? {};
-    let newUser = this.usersRepository.create(userDto);
+    let newUser = this.usersRepository.create({
+      ...userDto,
+      password: await this.hashingProvider.hashPassword(userDto.password),
+    });
     // newUser.profile = profile;
     newUser = await this.usersRepository.save(newUser);
     return newUser;
