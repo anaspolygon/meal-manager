@@ -9,6 +9,6 @@ export class AuthService {
     private readonly usersService: UsersService,
   ) {}
   public async signup(createUserDto: CreateUserDto) {
-    return this.usersService.createUser(createUserDto);
+    return await this.usersService.createUser(createUserDto);
   }
 }
