@@ -30,6 +30,12 @@ export class UserMeals {
     default: 0,
   })
   dinner_count: number;
+  @Column({
+    type: 'int',
+    nullable: false,
+    default: 0,
+  })
+  total: number;
   @ManyToOne(() => Users, (user) => user.userMeals)
   user: Users;
   @CreateDateColumn()

@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsNumber, IsOptional, IsPositive } from 'class-validator';
+import {
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsPositive,
+} from 'class-validator';
 
 export class CreateUserMealsDto {
   @IsNumber()
@@ -15,9 +21,14 @@ export class CreateUserMealsDto {
   @IsPositive()
   @IsOptional()
   lunch_count: number;
-  
+
   @IsNumber()
   @IsPositive()
   @IsOptional()
   dinner_count: number;
+
+  @IsInt()
+  @IsPositive()
+  @IsOptional()
+  total: number;
 }
