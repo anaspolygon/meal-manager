@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserMeals } from './user_meals.entity';
-import { Between, Repository } from 'typeorm';
+import { Between, Raw, Repository } from 'typeorm';
 import { CreateUserMealsDto } from './dtos/create-userMeals.dto';
 
 @Injectable()
@@ -22,12 +22,17 @@ export class UserMealsService {
     const end = new Date(today.getFullYear(), today.getMonth() + 1, 0);
     end.setHours(23, 59, 59, 999);
 
-    console.log(start, end);
+    console.log(typeof start, end);
+    console.log(typeof start.toISOString(), end.toISOString());
 
     return this.userMealsRepository.find({
       where: {
         user: { id: userId },
-        createdAt: Between(start, end),
+        // createdAt: Between(start, end),
+        createdAt: Raw(
+          (alias) =>
+            `CAST(${alias} AS DATE) BETWEEN '${today.toISOString().split('T')[0]}' AND '${today.toISOString().split('T')[0]}'`,
+        ),
       },
     });
   }
