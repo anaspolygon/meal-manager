@@ -5,6 +5,7 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Query,
 } from '@nestjs/common';
 import { UserMealsService } from './user_meals.service';
 import { CreateUserMealsDto } from './dtos/create-userMeals.dto';
@@ -13,7 +14,12 @@ import { CreateUserMealsDto } from './dtos/create-userMeals.dto';
 export class UserMealsController {
   constructor(private readonly userMealsService: UserMealsService) {}
   @Get(':userId')
-  getUserMeals(@Param('userId', ParseIntPipe) userId: number) {
+  getUserMeals(
+    @Param('userId', ParseIntPipe) userId: number,
+    @Query('start') start: string,
+    @Query('end') end: string,
+  ) {
+    console.log(start, end);
     return this.userMealsService.getUserMeals(userId);
   }
   @Post()
