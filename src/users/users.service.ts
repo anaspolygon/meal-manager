@@ -17,11 +17,16 @@ export class UsersService {
     private readonly hashingProvider: HashingProvider,
   ) {}
 
-  public getAllUsers() {
-    return this.usersRepository.find({
-      select: ['id', 'email'],
-      // relations: ['profile', 'userMeals', 'userDeposits'],
+  public async getAllUsers() {
+    const users = await this.usersRepository.find({
+      select: ['id', 'name', 'email'],
+      relations: ['profile'],
     });
+    return users.map((user) => ({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    }));
   }
 
   public async createUser(userDto: CreateUserDto) {

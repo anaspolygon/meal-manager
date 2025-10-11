@@ -10,6 +10,11 @@ import {
 import { CreateProfileDto } from 'src/profile/dtos/create-profile.dto';
 
 export class CreateUserDto {
+  @IsString()
+  // @IsNotEmpty()
+  @MaxLength(100)
+  name: string;
+
   @IsEmail()
   @IsNotEmpty()
   @MaxLength(100)

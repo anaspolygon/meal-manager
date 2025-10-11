@@ -20,11 +20,19 @@ export class Users {
   id: number;
   @Column({
     type: 'varchar',
-    nullable: false,
+    nullable: true,
+    length: 100,
+  })
+  name: string;
+
+  @Column({
+    type: 'varchar',
+    nullable: true,
     length: 100,
     unique: true,
   })
   email: string;
+
   @Column({
     type: 'varchar',
     nullable: false,
