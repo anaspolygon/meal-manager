@@ -38,7 +38,20 @@ export class UserMealsService {
   }
 
   public async createMeal(userMeal: CreateUserMealsDto) {
-    console.log(userMeal);
+    const today = new Date();
+    const startOfDay = new Date(today.setHours(0, 0, 0, 0));
+    const endOfDay = new Date(today.setHours(23, 59, 59, 999));
+    // const user = await this.userMealsRepository.findOne({
+    //   where: {
+    //     id: userMeal.userId,
+    //     createdAt: Between(startOfDay, endOfDay),
+    //   },
+    // });
+
+
+    // console.log(user)
+
+    // console.log(userMeal,"============================>");
     const meal = this.userMealsRepository.create({
       ...userMeal,
       user: { id: userMeal.userId },

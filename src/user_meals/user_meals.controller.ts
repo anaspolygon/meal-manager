@@ -24,6 +24,7 @@ export class UserMealsController {
   }
   @Post()
   async createMeal(@Body() userMeal: CreateUserMealsDto) {
+    console.log(userMeal,"==================>")
     return await this.userMealsService.createMeal(userMeal);
   }
 }
