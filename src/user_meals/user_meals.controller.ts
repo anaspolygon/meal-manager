@@ -13,6 +13,10 @@ import { CreateUserMealsDto } from './dtos/create-userMeals.dto';
 @Controller('user-meals')
 export class UserMealsController {
   constructor(private readonly userMealsService: UserMealsService) {}
+  @Get('today-meals')
+  async getTodayMeals() {
+    return await this.userMealsService.getTodayMeals();
+  }
   @Get(':userId')
   getUserMeals(
     @Param('userId', ParseIntPipe) userId: number,
@@ -22,9 +26,10 @@ export class UserMealsController {
     console.log(start, end);
     return this.userMealsService.getUserMeals(userId);
   }
+
   @Post()
   async createMeal(@Body() userMeal: CreateUserMealsDto) {
-    console.log(userMeal,"==================>")
+    console.log(userMeal, '==================>');
     return await this.userMealsService.createMeal(userMeal);
   }
 }

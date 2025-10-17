@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserMeals } from './user_meals.entity';
 import { Between, Raw, Repository } from 'typeorm';
@@ -37,21 +37,57 @@ export class UserMealsService {
     });
   }
 
+  public getTodayMeals() {
+    const today = new Date();
+    const startOfDay = new Date(today.setHours(0, 0, 0, 0));
+    const endOfDay = new Date(today.setHours(23, 59, 59, 999));
+    console.log(startOfDay, endOfDay);
+    return this.userMealsRepository.find({
+      where: {
+        createdAt: Between(startOfDay, endOfDay),
+      },
+      relations: ['user'],
+      select: {
+        id: true,
+        breakfast_count: true,
+        lunch_count: true,
+        dinner_count: true,
+        total: true,
+        user: { name: true, email: true },
+      },
+    });
+  }
+
   public async createMeal(userMeal: CreateUserMealsDto) {
     const today = new Date();
     const startOfDay = new Date(today.setHours(0, 0, 0, 0));
     const endOfDay = new Date(today.setHours(23, 59, 59, 999));
-    // const user = await this.userMealsRepository.findOne({
-    //   where: {
-    //     id: userMeal.userId,
-    //     createdAt: Between(startOfDay, endOfDay),
-    //   },
-    // });
 
+    const hasMeal = await this.userMealsRepository.findOne({
+      where: {
+        user: { id: userMeal.userId },
+        createdAt: Between(startOfDay, endOfDay),
+      },
+      relations: ['user'],
+      select: {
+        id: true,
+        breakfast_count: true,
+        lunch_count: true,
+        dinner_count: true,
+        total: true,
+        user: { name: true, email: true },
+      },
+    });
 
-    // console.log(user)
+    console.log('hasMeal', hasMeal);
 
-    // console.log(userMeal,"============================>");
+    if (hasMeal) {
+      // ⚠️ Throw an error instead of saving a duplicate entry
+      throw new BadRequestException(
+        `You have already submitted ${hasMeal.user.name}'s meal for today.`,
+      );
+    }
+
     const meal = this.userMealsRepository.create({
       ...userMeal,
       user: { id: userMeal.userId },
