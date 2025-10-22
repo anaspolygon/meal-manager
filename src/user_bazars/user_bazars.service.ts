@@ -11,7 +11,7 @@ export class UserBazarsService {
     @InjectRepository(UserBazars)
     private readonly userBazarsRepository: Repository<UserBazars>,
   ) {}
-  public async createUserBazar(userBazar: CreateUserBazarsDto) {
+  public async   createUserBazar(userBazar: CreateUserBazarsDto) {
     const newBazar = this.userBazarsRepository.create({
       ...userBazar,
       user: { id: userBazar.userId },
